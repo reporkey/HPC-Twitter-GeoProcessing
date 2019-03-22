@@ -14,6 +14,6 @@ class Options:
                                  default=os.path.join(self.dirname, 'data\\melbGrid.json'), type=argparse.FileType('r'),
                                  help="Grid path.")
         self.parser.add_argument('--twitters',
-                                 default=os.path.join(self.dirname, 'data\\tinyTwitter.json'), type=argparse.FileType('r'),
+                                 default=os.path.join(self.dirname, 'data\\new.json'), type=argparse.FileType('r'),
                                  help="Twitter path.")
 
