@@ -29,30 +29,6 @@ class Reader:
     def tweet_reader(self):
         with open(self.twittersFile, 'rb') as twitters_json:
             self.twitters = json.load(twitters_json)["rows"]
-            parser = ijson.parse(twitters_json)
-            for prefix, event, value in parser:
-                # in 'doc.coordinates' object
-                if (prefix, event, value) == ('rows.item.doc', 'map_key', 'coordinates'):
-                    coordinate = ObjectBuilder()
-                elif prefix.startswith('rows.item.doc.coordinates'):
-                    coordinate.event(event, value)
-                # in 'doc.retweeted' object
-                elif (prefix, event, value) == ('rows.item.doc', 'map_key', 'retweeted'):
-                    retweeted = ObjectBuilder()
-                elif prefix.startswith('rows.item.doc.retweeted'):
-                    retweeted.event(event, value)
-                # in 'doc.entities.hashtags' object
-                elif (prefix, event, value) == ('rows.item.doc.entities', 'map_key', 'hashtags'):
-                    hashtag = ObjectBuilder()
-                elif prefix.startswith('rows.item.doc.entities.hashtags'):
-                    hashtag.event(event, value)
-                # at the end of this tweet, record (cood, hashtag, retweeted) into twitters
-                elif (prefix, event) == ('rows.item.doc', 'end_map'):
-                    self.twitters.append({'coordinate': coordinate.value,
-                                     'hashtag': hashtag.value,
-                                     'retweeted': retweeted.value})
-                # when the list meet the size of chunks, send it
-                if len(self.twitters) >= self.entities:
 
 
 '''
