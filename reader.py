@@ -1,12 +1,16 @@
 import json
 import ijson
 from ijson.common import ObjectBuilder
+import os
+import math
 
 class Reader:
 
     def __init__(self, args):
         self.gridFile = args.grid.name
         self.twittersFile = args.twitters.name
+        # There're this many tweets entities in each chunks
+        self.entities = math.floor(os.stat(self.twittersFile).st_size/args.chunks/24952156*7000)
         self.grids = []  # A python list that contains all grids' boundaries
         self.twitters = []  # A python list that contains all twitters' objects
 
@@ -17,9 +21,39 @@ class Reader:
             for grid in data:
                 self.grids.append(grid["properties"])
 
+    # def tweet_receiver(self, comm):
+    #     data = comm.recv(source=0)
+    #     print('On', comm.Get_rank(), ', data is ', data)
+
+
     def tweet_reader(self):
         with open(self.twittersFile, 'rb') as twitters_json:
             self.twitters = json.load(twitters_json)["rows"]
+            parser = ijson.parse(twitters_json)
+            for prefix, event, value in parser:
+                # in 'doc.coordinates' object
+                if (prefix, event, value) == ('rows.item.doc', 'map_key', 'coordinates'):
+                    coordinate = ObjectBuilder()
+                elif prefix.startswith('rows.item.doc.coordinates'):
+                    coordinate.event(event, value)
+                # in 'doc.retweeted' object
+                elif (prefix, event, value) == ('rows.item.doc', 'map_key', 'retweeted'):
+                    retweeted = ObjectBuilder()
+                elif prefix.startswith('rows.item.doc.retweeted'):
+                    retweeted.event(event, value)
+                # in 'doc.entities.hashtags' object
+                elif (prefix, event, value) == ('rows.item.doc.entities', 'map_key', 'hashtags'):
+                    hashtag = ObjectBuilder()
+                elif prefix.startswith('rows.item.doc.entities.hashtags'):
+                    hashtag.event(event, value)
+                # at the end of this tweet, record (cood, hashtag, retweeted) into twitters
+                elif (prefix, event) == ('rows.item.doc', 'end_map'):
+                    self.twitters.append({'coordinate': coordinate.value,
+                                     'hashtag': hashtag.value,
+                                     'retweeted': retweeted.value})
+                # when the list meet the size of chunks, send it
+                if len(self.twitters) >= self.entities:
+
 
 '''
 Method 0: Using json.load to read whole json file. It's the easiest and fastest(not 
@@ -129,4 +163,16 @@ Twitters structure:
         ...
     }
 }
+'''
+
+'''
+size of tinyTwitter.json file: 3580480
+entities in tinyTwitter.json file: 1000
+
+size of smallTwitter.json file: 24952156
+entities in smallTwitter.json file: 7000
+
+size of bigTwitter.json file: 10948035094
+estimated entities in bigTwitter.json file: 3071327
+
 '''

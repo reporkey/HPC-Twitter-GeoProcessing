@@ -11,9 +11,14 @@ class Options:
     def _init_parser(self):
         self.parser = argparse.ArgumentParser("Count the number of twitters from certain areas.")
         self.parser.add_argument('--grid',
-                                 default=os.path.join(self.dirname, 'data\\melbGrid.json'), type=argparse.FileType('r'),
-                                 help="Grid path.")
+                                 default=os.path.join(self.dirname, 'data\\melbGrid.json'),
+                                 type=argparse.FileType('r'),
+                                 help="Grid path." + os.path.join(self.dirname, 'data\\melbGrid.json'))
         self.parser.add_argument('--twitters',
-                                 default=os.path.join(self.dirname, 'data\\new.json'), type=argparse.FileType('r'),
-                                 help="Twitter path.")
-
+                                 default=os.path.join(self.dirname, 'data\\tinyTwitter.json'),
+                                 type=argparse.FileType('r'),
+                                 help="Twitter path.Default=" + os.path.join(self.dirname, 'data\\tinyTwitter.json'))
+        self.parser.add_argument('--chunks',
+                                 default=32,
+                                 type=int,
+                                 help="Number of tweet entities in the each chunck. Default=100000")

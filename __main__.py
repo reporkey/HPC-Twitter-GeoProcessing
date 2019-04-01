@@ -13,20 +13,21 @@ def main(args):
     # size = comm.Get_size()
     # rank = comm.Get_rank()
 
-    # if rank == 0:  # only the first process reading
     read = Reader(args)
-    read.grid_reader()
-    read.tweet_reader()
+    print(read.entities)
+    # read.grid_reader()
+    # if rank == 0:  # only the first process reading
+    # read.tweet_reader()
 
+    # print(len(read.twitters))
     # elif rank == 1:
-    #     data = comm.recv(source=0)
-    #     print('On process 1, data is ', data)
+    #     read.tweet_receiver(comm)
 
 
 
-    print("Read Success")
-    count = Count(read)
-    count.count()
+    # print("Read Success")
+    # count = Count(read)
+    # count.count()
     # print(count.num)
     # print("Num count Success")
     # count.count_hashtags()
