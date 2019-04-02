@@ -9,8 +9,11 @@ class Reader:
     def __init__(self, args):
         self.gridFile = args.grid.name
         self.twittersFile = args.twitters.name
-        # There're this many tweets entities in each chunks
-        self.entities = math.floor(os.stat(self.twittersFile).st_size/args.chunks/24952156*7000)
+        # Since it's hard to measure the density of tweet entities in big file. So we assume that it has the same
+        # density as small file.  density = num of tweets per file byte
+        density = 7000 / 24952156
+        file_size = os.stat(self.twittersFile).st_size
+        self.entities = math.floor(file_size * density / args.chunks)  # num of entities in each chunk
         self.grids = []  # A python list that contains all grids' boundaries
         self.twitters = []  # A python list that contains all twitters' objects
 
@@ -27,8 +30,15 @@ class Reader:
 
 
     def tweet_reader(self):
-        with open(self.twittersFile, 'rb') as twitters_json:
-            self.twitters = json.load(twitters_json)["rows"]
+        with open(self.twittersFile, 'r') as twitters_json:
+            for line in twitters_json:
+                obj_str = line[:-2]
+                try:
+                    obj = json.loads(obj_str)
+                except ValueError:
+                    print(obj_str)
+                    continue
+                self.twitters.append(obj)
 
 
 '''
