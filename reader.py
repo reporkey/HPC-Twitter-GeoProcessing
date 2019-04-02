@@ -9,6 +9,7 @@ class Reader:
     def __init__(self, args):
         self.gridFile = args.grid.name
         self.twittersFile = args.twitters.name
+        self.twitter_index = []
         # Since it's hard to measure the density of tweet entities in big file. So we assume that it has the same
         # density as small file.  density = num of tweets per file byte
         density = 7000 / 24952156
@@ -28,17 +29,19 @@ class Reader:
     #     data = comm.recv(source=0)
     #     print('On', comm.Get_rank(), ', data is ', data)
 
+    def search_line_index(self):
+        with open(self.twittersFile, "r") as twitters_json:
+            while twitters_json.readline() != "":
+                self.twitter_index.append(twitters_json.tell())
+
 
     def tweet_reader(self):
-        with open(self.twittersFile, 'r') as twitters_json:
-            for line in twitters_json:
-                obj_str = line[:-2]
-                try:
-                    obj = json.loads(obj_str)
-                except ValueError:
-                    print(obj_str)
-                    continue
-                self.twitters.append(obj)
+        with open(self.twittersFile, "r") as twitters_json:
+            for each in self.twitter_index:
+                twitters_json.seek(each)
+                print(twitters_json.readline())
+
+
 
 
 '''

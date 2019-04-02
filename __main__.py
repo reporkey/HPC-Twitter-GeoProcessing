@@ -9,22 +9,25 @@ from count import Count
 def main(args):
 
     # init MPI
-    comm = MPI.COMM_WORLD
-    size = comm.Get_size()
-    rank = comm.Get_rank()
+    # comm = MPI.COMM_WORLD
+    # size = comm.Get_size()
+    # rank = comm.Get_rank()
 
     read = Reader(args)
     read.grid_reader()
-    if rank == 0:  # only the first process read tweet
-        read.tweet_reader()
+    read.search_line_index()
+    print(read.twitter_index)
+    read.tweet_reader()
+    # if rank == 0:  # only the first process read tweet
+    # read.tweet_reader()
 
     # elif rank == 1:
     #     read.tweet_receiver(comm)
 
-    count = Count(read)
-    count.count()
-    for area, value in count.num.items():
-        print(area, ": ", value['num'], "; hashtags: ", value['hashtags'][:5])
+    # count = Count(read)
+    # count.count()
+    # for area, value in count.num.items():
+    #     print(area, ": ", value['num'], "; hashtags: ", value['hashtags'][:5])
 
 
 def run_parse():
