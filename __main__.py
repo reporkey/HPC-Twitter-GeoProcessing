@@ -17,7 +17,7 @@ def main(args):
     read.grid_reader()
     read.search_line_index()
     print(read.twitter_index)
-    read.tweet_reader()
+    # read.tweet_reader()
     # if rank == 0:  # only the first process read tweet
     # read.tweet_reader()
 
