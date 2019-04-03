@@ -23,7 +23,7 @@ class Count:
                         for hashtag in tweet_hashtags:
                             grid_hashtags[hashtag["text"]] = grid_hashtags.get(hashtag["text"], 0) + 1
                     break
-        # sort hashtags after all count
+
         # the type of hashtags are changed from dict to list of tuple, since dict doesn't have the order
-        for key in self.num:
-            self.num[key]["hashtags"] = sorted(self.num[key]["hashtags"].items(), key= lambda a : a[1], reverse=True)
+        # for key in self.num:
+        #     self.num[key]["hashtags"] = sorted(self.num[key]["hashtags"].items(), key= lambda a : a[1], reverse=True)

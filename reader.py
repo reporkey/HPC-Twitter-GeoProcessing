@@ -34,10 +34,9 @@ class Reader:
             while twitters_json.readline() != "":
                 self.twitter_index.append(twitters_json.tell())
 
-
-    def tweet_reader(self, indexes):
+    def tweet_reader(self, chunks):
         with open(self.twittersFile, "r") as twitters_json:
-            for each in indexes:
+            for each in chunks:
                 twitters_json.seek(each)
                 obj_str = twitters_json.readline()
                 while len(obj_str) > 0 and obj_str[-1] != '}':
