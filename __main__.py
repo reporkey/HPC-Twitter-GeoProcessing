@@ -16,18 +16,13 @@ def main(args):
     read = Reader(args)
     read.grid_reader()
     read.search_line_index()
-    print(read.twitter_index)
-    # read.tweet_reader()
-    # if rank == 0:  # only the first process read tweet
-    # read.tweet_reader()
+    indexes = read.twitter_index
+    read.tweet_reader(indexes)
 
-    # elif rank == 1:
-    #     read.tweet_receiver(comm)
-
-    # count = Count(read)
-    # count.count()
-    # for area, value in count.num.items():
-    #     print(area, ": ", value['num'], "; hashtags: ", value['hashtags'][:5])
+    count = Count(read)
+    count.count()
+    for area, value in count.num.items():
+        print(area, ": ", value['num'], "; hashtags: ", value['hashtags'][:5])
 
 
 def run_parse():
