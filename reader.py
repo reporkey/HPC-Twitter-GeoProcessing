@@ -1,22 +1,19 @@
 import json
-import ijson
-from ijson.common import ObjectBuilder
-import os
-import math
+import numpy
 
 class Reader:
-
-    def __init__(self, args):
+    def __init__(self, args, n):
         self.gridFile = args.grid.name
         self.twittersFile = args.twitters.name
-        self.twitter_index = []
-        # Since it's hard to measure the density of tweet entities in big file. So we assume that it has the same
-        # density as small file.  density = num of tweets per file byte
-        density = 7000 / 24952156
-        file_size = os.stat(self.twittersFile).st_size
-        self.entities = math.floor(file_size * density / args.chunks)  # num of entities in each chunk
         self.grids = []  # A python list that contains all grids' boundaries
-        self.twitters = []  # A python list that contains all twitters' objects
+        self.num = {"A1": {"num": 0, "hashtags": {}}, "A2": {"num": 0, "hashtags": {}},
+                    "A3": {"num": 0, "hashtags": {}}, "A4": {"num": 0, "hashtags": {}},
+                    "B1": {"num": 0, "hashtags": {}}, "B2": {"num": 0, "hashtags": {}},
+                    "B3": {"num": 0, "hashtags": {}}, "B4": {"num": 0, "hashtags": {}},
+                    "C1": {"num": 0, "hashtags": {}}, "C2": {"num": 0, "hashtags": {}},
+                    "C3": {"num": 0, "hashtags": {}}, "C4": {"num": 0, "hashtags": {}},
+                    "C5": {"num": 0, "hashtags": {}}, "D3": {"num": 0, "hashtags": {}},
+                    "D4": {"num": 0, "hashtags": {}}, "D5": {"num": 0, "hashtags": {}}}
 
     def grid_reader(self):
         with open(self.gridFile) as grid_json:
@@ -25,14 +22,12 @@ class Reader:
             for grid in data:
                 self.grids.append(grid["properties"])
 
-    # def tweet_receiver(self, comm):
-    #     data = comm.recv(source=0)
-    #     print('On', comm.Get_rank(), ', data is ', data)
-
     def search_line_index(self):
         with open(self.twittersFile, "r") as twitters_json:
+            twitter_index = []
             while twitters_json.readline() != "":
-                self.twitter_index.append(twitters_json.tell())
+                twitter_index.append(twitters_json.tell())
+        return twitter_index
 
     def tweet_reader(self, chunks):
         with open(self.twittersFile, "r") as twitters_json:
@@ -43,70 +38,43 @@ class Reader:
                     obj_str = obj_str[:-1]
                 try:
                     obj = json.loads(obj_str)
-                    self.twitters.append(obj)
+                    self.count(obj)
                 except:
                     continue
 
+    def count(self, obj):
+        loc = None
+        loc = obj["doc"]["coordinates"]["coordinates"]
+        if loc is None:
+            loc = obj["doc"]["coordinates"]["coordinates"]
+        if loc is None:
+            loc = obj["value"]["geometry"]["coordinates"]
+        if loc is None:
+            loc = obj["doc"]["geo"]["coordinates"].reverse()
+        if loc is None:
+            return
+        for grid in self.grids:
+            if grid["xmin"] <= loc[0] <= grid["xmax"] and grid["ymin"] <= loc[1] <= grid["ymax"]:
+                self.num[grid["id"]]["num"] += 1
+                if obj["doc"]["retweeted"] != "false":  # ignore tag counting if its retweeted
+                    text = obj["doc"]["text"]
+                    hashtags = self.search_hashtag(text)
+                    grid_hashtags = self.num[grid["id"]]["hashtags"]
+                    for hashtag in hashtags:
+                        grid_hashtags[hashtag] = grid_hashtags.get(hashtag, 0) + 1
 
 
-
-
-'''
-Method 0: Using json.load to read whole json file. It's the easiest and fastest(not 
-tested), but out of memory might be happened.
-'''
-            # self.twitters = json.load(twitters_json)["rows"]
-
-'''
-Method 1: Using ijson.items extracts all 'doc' objects. It does not allow extracts some
-part of 'doc'. It can reduce some size, but depending on the structure, the 'doc' 
-still can be quite large.
-'''
-            # self.twitters = ijson.items(twitters_json, 'rows.item.doc')
-
-'''
-Method 2: Using ijson.parse to read and filter out 'doc' object only, stored in a list. 
-The benefit is that it allows us to read 'doc' separately, which gives more options on
-memory management. But in the meanwhile, ijson.parse largely increases the runtime. 
-There are lots of comparisons.
-'''
-            # parser = ijson.parse(twitters_json)
-            # for prefix, event, value in parser:
-            #     if (prefix, event, value) == ('rows.item', 'map_key', 'doc'):
-            #         doc = ObjectBuilder()
-            #     elif prefix.startswith('rows.item.doc'):
-            #         doc.event(event, value)
-            #     elif (prefix, event) == ('rows.item', 'end_map'):
-            #         self.twitters.append(doc.value)
-
-'''
-Method 3: Using ijson.parse to read and filter out 'coordinates', 'hashtags' and 
-'retweeted' objects. Comparing with Method 2, this hugely save the space. The data is 
-unlikely be oversized in this scope of project. However, it also takes long time. Not 
-sure about the efficiency between Method 2 and Method 3.
-'''
-            # parser = ijson.parse(twitters_json)
-            # for prefix, event, value in parser:
-            #     # in 'doc.coordinates' object
-            #     if (prefix, event, value) == ('rows.item.doc', 'map_key', 'coordinates'):
-            #         coordinate = ObjectBuilder()
-            #     elif prefix.startswith('rows.item.doc.coordinates'):
-            #         coordinate.event(event, value)
-            #     # in 'doc.retweeted' object
-            #     elif (prefix, event, value) == ('rows.item.doc', 'map_key', 'retweeted'):
-            #         retweeted = ObjectBuilder()
-            #     elif prefix.startswith('rows.item.doc.retweeted'):
-            #         retweeted.event(event, value)
-            #     # in 'doc.entities.hashtags' object
-            #     elif (prefix, event, value) == ('rows.item.doc.entities', 'map_key', 'hashtags'):
-            #         hashtag = ObjectBuilder()
-            #     elif prefix.startswith('rows.item.doc.entities.hashtags'):
-            #         hashtag.event(event, value)
-            #     # at the end of this tweet, record (cood, hashtag, retweeted) into twitters
-            #     elif (prefix, event) == ('rows.item.doc', 'end_map'):
-            #         self.twitters.append({'coordinate': coordinate.value,
-            #                          'hashtag': hashtag.value,
-            #                          'retweeted': retweeted.value})
+    def search_hashtag(self, text):
+        hashtags = []
+        text = text.lower()
+        for tag_from in range(2, len(text)):
+            if text[tag_from-2:tag_from] == " #":
+                for j in range(tag_from, len(text)):
+                    if text[j] == " ":
+                        if text[tag_from-1:j] not in hashtags:  # if unique
+                            hashtags.append(text[tag_from-1:j])
+                        break
+        return hashtags
 
 '''
 grids structure: 

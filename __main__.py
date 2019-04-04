@@ -1,18 +1,29 @@
 from mpi4py import MPI
 import math
+import numpy
 
 from options import Options
 from reader import Reader
-from count import Count
 
 
-def add_counter(counter1, counter2, datatype):
-    for item in counter2:
-        if item in counter1:
-            counter1[item] += counter2[item]
+def add_result(obj1, obj2, datatype):
+    # combine num
+    for area_id in obj2:
+        if area_id in obj1:
+            obj1[area_id]["num"] += obj2[area_id]["num"]
         else:
-            counter1[item] = counter2[item]
-    return counter1
+            obj1[area_id]["num"] = obj2[area_id]["num"]
+    # combine hashtag
+    for area_id in obj2:
+        if area_id in obj1:  # matching area
+            for tag in obj2[area_id]["hashtags"]:
+                if tag in obj1[area_id]["hashtags"]:  # matching hashtags
+                    obj1[area_id]["hashtags"][tag] += obj2[area_id]["hashtags"][tag]
+                else:
+                    obj1[area_id]["hashtags"][tag] = obj2[area_id]["hashtags"][tag]
+        else:
+            obj1[area_id] = obj2[area_id]
+    return obj1
 
 
 def chunk_list(lists, n):
@@ -24,7 +35,7 @@ def chunk_list(lists, n):
             up = (i + 1) * size
         else:
             up = len(lists) - 1
-        chunks.append(lists[i*size:(i+1)*size])
+        chunks.append(lists[down:up])
     return chunks
 
 
@@ -34,32 +45,51 @@ def main(args):
     size = comm.Get_size()
     rank = comm.Get_rank()
 
-    read = Reader(args)
+    read = Reader(args, size)
     read.grid_reader()
 
-    # split lists into n chunks evenly
+    # split index lists into n chunks evenly
     chunks = []
     if rank == 0:
-        read.search_line_index()
-        chunks = chunk_list(read.twitter_index, size)
+        twitter_index = read.search_line_index()
+        chunks = chunk_list(twitter_index, size)
     # scatter indexes to each processor, assigning jobs to them
     chunks = comm.scatter(chunks)
     read.tweet_reader(chunks)
+    comm.barrier()
 
-    count = Count(read)
-    count.count()
-    # gather number count result to master
-    counter_sum_op = MPI.Op.Create(add_counter, commute=True)
-    for area, value in count.num.items():
-        value["num"] = comm.reduce(value["num"], op=MPI.SUM)
-        value["hashtags"] = comm.allreduce(value["hashtags"], op=counter_sum_op)
+    # gather count result to master
+    sum_op = MPI.Op.Create(add_result, commute=True)
+    read.num = comm.reduce(read.num, op=sum_op)
 
     if rank == 0:
-        # sort hashtags by key after all count
-        for key in count.num:
-            count.num[key]["hashtags"] = sorted(count.num[key]["hashtags"].items(), key= lambda a : a[1], reverse=True)
-        for area, value in count.num.items():
-            print(area, ": ", value['num'], "; hashtags: ", value['hashtags'][:5])
+        # sort hashtags
+        for area_id, value in read.num.items():
+            value["hashtags"] = sorted(value["hashtags"].items(), key=lambda a: a[1], reverse=True)
+        # sort number
+        read.num = sorted(read.num.items(), key=lambda a: a[1]["num"], reverse=True)
+        # print number
+        print("The total number of Twitter in each area.")
+        for i in range(0, len(read.num)):
+            if i != len(read.num) - 1:
+                print(read.num[i][0] + ": " + str(read.num[i][1]["num"]) + " posts, ")
+            else:
+                print(read.num[i][0] + ": " + str(read.num[i][1]["num"]) + " posts")
+        # print hashtags
+        print("\nTop 5 hashtags in each area.")
+        for area in read.num:
+            fifth = 4
+            unique = []
+            len(unique)
+            while len(unique) < 5 and fifth < len(area[1]["hashtags"]):
+                fifth += 1
+                unique = []
+                for each in area[1]["hashtags"][: fifth]:
+                    unique.append(each[1])
+                unique = numpy.unique(unique)
+            print(area[0]+": "+str(tuple((area[1]["hashtags"])[:fifth]))
+                  .replace("', ", ",").replace("('#", "(#").replace(" ", ""))
+
 
 def run_parse():
     options = Options()
