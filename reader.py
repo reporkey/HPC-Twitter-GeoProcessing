@@ -1,11 +1,11 @@
 import json
-import numpy
+
 
 class Reader:
     def __init__(self, args, n):
         self.gridFile = args.grid.name
         self.twittersFile = args.twitters.name
-        self.grids = []  # A python list that contains all grids' boundaries
+        self.grids = []  # A python list that contains grids' boundaries
         self.num = {"A1": {"num": 0, "hashtags": {}}, "A2": {"num": 0, "hashtags": {}},
                     "A3": {"num": 0, "hashtags": {}}, "A4": {"num": 0, "hashtags": {}},
                     "B1": {"num": 0, "hashtags": {}}, "B2": {"num": 0, "hashtags": {}},
@@ -17,19 +17,19 @@ class Reader:
 
     def grid_reader(self):
         with open(self.gridFile) as grid_json:
-            # Filter raw geo info to only grids' boundaries
+            # abstract the grids' boundaries
             data = json.load(grid_json)["features"]
             for grid in data:
                 self.grids.append(grid["properties"])
 
-    def search_line_index(self):
+    def search_line_index(self):  # record line indexes in the whole file
         with open(self.twittersFile, "r") as twitters_json:
             twitter_index = []
             while twitters_json.readline() != "":
                 twitter_index.append(twitters_json.tell())
         return twitter_index
 
-    def tweet_reader(self, chunks):
+    def tweet_reader(self, chunks):  # read and count tweet
         with open(self.twittersFile, "r") as twitters_json:
             for each in chunks:
                 twitters_json.seek(each)
@@ -43,100 +43,42 @@ class Reader:
                     continue
 
     def count(self, obj):
-        loc = None
-        loc = obj["doc"]["coordinates"]["coordinates"]
-        if loc is None:
-            loc = obj["doc"]["coordinates"]["coordinates"]
-        if loc is None:
-            loc = obj["value"]["geometry"]["coordinates"]
-        if loc is None:
-            loc = obj["doc"]["geo"]["coordinates"].reverse()
-        if loc is None:
+        # check loc validity
+        loc = []
+        if "doc" in obj:
+            if "coordinates" in obj["doc"]:
+                if "coordinates" in obj["doc"]["coordinates"] and obj["doc"]["coordinates"]["type"] == "Point":
+                    loc = obj["doc"]["coordinates"]["coordinates"]
+            elif "geo" in obj["doc"]:
+                if "coordinates" in obj["doc"]["geo"] and obj["doc"]["geo"]["type"] == "Point":
+                    loc = obj["doc"]["geo"]["coordinates"].reverse()
+        elif "value" in obj:
+            if "geometry" in obj["value"]:
+                if "coordinates" in obj["value"]["geometry"] and obj["value"]["geometry"]["type"] == "Point":
+                    loc = obj["value"]["geometry"]["coordinates"]
+        if loc is []:
             return
         for grid in self.grids:
             if grid["xmin"] <= loc[0] <= grid["xmax"] and grid["ymin"] <= loc[1] <= grid["ymax"]:
                 self.num[grid["id"]]["num"] += 1
-                if obj["doc"]["retweeted"] != "false":  # ignore tag counting if its retweeted
+                if "text" in obj["doc"]:
                     text = obj["doc"]["text"]
                     hashtags = self.search_hashtag(text)
                     grid_hashtags = self.num[grid["id"]]["hashtags"]
                     for hashtag in hashtags:
                         grid_hashtags[hashtag] = grid_hashtags.get(hashtag, 0) + 1
 
-
-    def search_hashtag(self, text):
+    def search_hashtag(self, text):  # search and return hashtags from a string
         hashtags = []
         text = text.lower()
-        for tag_from in range(2, len(text)):
+        tag_from = 0
+        while tag_from < len(text):
             if text[tag_from-2:tag_from] == " #":
                 for j in range(tag_from, len(text)):
                     if text[j] == " ":
                         if text[tag_from-1:j] not in hashtags:  # if unique
                             hashtags.append(text[tag_from-1:j])
+                            tag_from = j
                         break
+            tag_from += 1
         return hashtags
-
-'''
-grids structure: 
-[
-    { 
-        "type": "Feature", 
-        "properties": { 
-            "id": "A1", 
-            "xmin": 144.700000, 
-            "xmax": 144.850000, 
-            "ymin": -37.650000, 
-            "ymax": -37.500000 
-        }, 
-        "geometry": { 
-            "type": "Polygon", 
-            "coordinates": [ 
-                [ 
-                    [ 144.7, -37.5 ], 
-                    [ 144.85, -37.5 ], 
-                    [ 144.85, -37.65 ], 
-                    [ 144.7, -37.65 ], 
-                    [ 144.7, -37.5 ] 
-                ] 
-            ] 
-        } 
-    },
-    ...
-]
-
-Twitters structure:
-{ 
-    ...
-    "row": {
-        [
-            "doc" : {
-                "_id" : "570379215192727552",
-                "value" : {
-                    "type":"Feature",
-                    "geometry":{
-                        "type":"Point",
-                        "coordinates":[144.92340088,-37.95935781]
-                    }, 
-                "entities" : {
-                    "hashtags" : [
-                        {"indices":[95,105],"text":"melbourne"}
-                    ]
-                }
-            }
-        ]
-        ...
-    }
-}
-'''
-
-'''
-size of tinyTwitter.json file: 3580480
-entities in tinyTwitter.json file: 1000
-
-size of smallTwitter.json file: 24952156
-entities in smallTwitter.json file: 7000
-
-size of bigTwitter.json file: 10948035094
-estimated entities in bigTwitter.json file: 3071327
-
-'''

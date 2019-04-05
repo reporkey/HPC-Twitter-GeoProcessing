@@ -7,13 +7,13 @@ from reader import Reader
 
 
 def add_result(obj1, obj2, datatype):
-    # combine num
+    # reduce num
     for area_id in obj2:
         if area_id in obj1:
             obj1[area_id]["num"] += obj2[area_id]["num"]
         else:
-            obj1[area_id]["num"] = obj2[area_id]["num"]
-    # combine hashtag
+            obj1[area_id] = obj2[area_id]
+    # reduce hashtag
     for area_id in obj2:
         if area_id in obj1:  # matching area
             for tag in obj2[area_id]["hashtags"]:
@@ -21,21 +21,14 @@ def add_result(obj1, obj2, datatype):
                     obj1[area_id]["hashtags"][tag] += obj2[area_id]["hashtags"][tag]
                 else:
                     obj1[area_id]["hashtags"][tag] = obj2[area_id]["hashtags"][tag]
-        else:
-            obj1[area_id] = obj2[area_id]
     return obj1
 
 
-def chunk_list(lists, n):
+def divide_index(lists, n):
     chunks = []
     size = math.ceil(len(lists) / n)
     for i in range(0, n):
-        down = i*size
-        if (i+1)*size < len(lists):
-            up = (i + 1) * size
-        else:
-            up = len(lists) - 1
-        chunks.append(lists[down:up])
+        chunks.append(lists[i*size: (i+1)*size])
     return chunks
 
 
@@ -48,11 +41,11 @@ def main(args):
     read = Reader(args, size)
     read.grid_reader()
 
-    # split index lists into n chunks evenly
+    # divide index lists into n chunks evenly
     chunks = []
     if rank == 0:
         twitter_index = read.search_line_index()
-        chunks = chunk_list(twitter_index, size)
+        chunks = divide_index(twitter_index, size)
     # scatter indexes to each processor, assigning jobs to them
     chunks = comm.scatter(chunks)
     read.tweet_reader(chunks)
@@ -62,6 +55,7 @@ def main(args):
     sum_op = MPI.Op.Create(add_result, commute=True)
     read.num = comm.reduce(read.num, op=sum_op)
 
+    # sort and print on master
     if rank == 0:
         # sort hashtags
         for area_id, value in read.num.items():
@@ -92,6 +86,7 @@ def main(args):
 
 
 def run_parse():
+    # parse optional arguments in commend line (e.g. path of file)
     options = Options()
     args = options.parser.parse_args()
     main(args)
