@@ -28,7 +28,7 @@ There are different ways to classifiy parallel computers. The widely used classi
 Message Passing  Interface(MPI) is an useful open source tool in multi-core programming which contains many functions to share message in processes. The main difference between OpenMP and MPI is that the processes using MPI does not shared memory between each other, while OpenMP is a shared memory multiprocessing programming library.  MPI therefore able to be used in wide application regardless the physical architecture of platform.
 
 Considering that the size of data could be up to 15 GB, even though divided into chunks it is still a heavy load message transmission. So rather than reading the whole data and then sending out pieces of raw data, the master process scans and records the line indexes, and then scatters the indexes instead. A simple calculation can imply the efficiency and sufficiency. In $smallTwitter.json$, there are 
-about 7000 lines, each is one tweet, and the size of the file is about 25 MB. If we assume tweets density is even, a 15 GB file may contains: \[tweet\_num = 25MB / 15GB * 7000 \approx 4.2million\] If those tweets are represented in indexes, and each takes size of $int$, then 15 GB tweets file can be abstracted to: \[indexes\_size = 4.2million * 24bytes \approx 100MB \] The load of transmission could be largely reduced by representing tweets in form of indexes. 
+about 7000 lines, each is one tweet, and the size of the file is about 25 MB. If we assume tweets density is even, a 15 GB file may contains: \[tweet\_num = 25MB / 15GB * 7000 |approx 4.2million\] If those tweets are represented in indexes, and each takes size of $int$, then the size of all: \[index\_size = 4.2million * 24bytes |approx  \]
 
 
 
