@@ -78,7 +78,7 @@ class Reader:
                     if text[j] == " ":
                         if text[tag_from-1:j] not in hashtags:  # if unique
                             hashtags.append(text[tag_from-1:j])
-                            tag_from = j
+                        tag_from = j
                         break
             tag_from += 1
         return hashtags
