@@ -67,6 +67,7 @@ class Reader:
                     grid_hashtags = self.num[grid["id"]]["hashtags"]
                     for hashtag in hashtags:
                         grid_hashtags[hashtag] = grid_hashtags.get(hashtag, 0) + 1
+                return
 
     def search_hashtag(self, text):  # search and return hashtags from a string
         hashtags = []
