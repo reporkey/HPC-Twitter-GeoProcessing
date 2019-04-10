@@ -2,7 +2,6 @@ from mpi4py import MPI
 import math
 import numpy
 
-from options import Options
 from reader import Reader
 
 
@@ -32,13 +31,13 @@ def divide_index(lists, n):
     return chunks
 
 
-def main(args):
+def main(grid_path, twitter_path):
     # init MPI
     comm = MPI.COMM_WORLD
     size = comm.Get_size()
     rank = comm.Get_rank()
 
-    read = Reader(args, size)
+    read = Reader(grid_path, twitter_path, size)
     read.grid_reader()
 
     # divide index lists into n chunks evenly
@@ -84,13 +83,7 @@ def main(args):
             print(area[0]+": "+str(tuple((area[1]["hashtags"])[:fifth]))
                   .replace("', ", ",").replace("('#", "(#").replace(" ", ""))
 
-
-def run_parse():
-    # parse optional arguments in commend line (e.g. path of file)
-    options = Options()
-    args = options.parser.parse_args()
-    main(args)
-
-
 if __name__ == '__main__':
-    run_parse()
+    grid_path = './data/melbGrid.json'
+    twitter_path = './data/tinyTwitter.json'
+    main(grid_path, twitter_path)

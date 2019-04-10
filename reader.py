@@ -2,9 +2,9 @@ import json
 
 
 class Reader:
-    def __init__(self, args, n):
-        self.gridFile = args.grid.name
-        self.twittersFile = args.twitters.name
+    def __init__(self, grid_path, twitter_path, n):
+        self.gridFile = grid_path
+        self.twittersFile = twitter_path
         self.grids = []  # A python list that contains grids' boundaries
         self.num = {"A1": {"num": 0, "hashtags": {}}, "A2": {"num": 0, "hashtags": {}},
                     "A3": {"num": 0, "hashtags": {}}, "A4": {"num": 0, "hashtags": {}},
