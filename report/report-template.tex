@@ -17,6 +17,11 @@
 
 
 \section{Introduction}
+This report aims to describe the implementation of a parallelized project applying the University of Melbourne HPC facility SPARTAN. A brief description of how to identify Twitter usage and the top-5 hashtags from the given JSON files by using this application will be given.
+
+There are four JSON files. The melbGrid.json file illustrates the geography information, and two small-size raw data files to test the application. After testing, it is necessary to search the total number of Twitter and the frequency of top-5 hashtags in each area from the bigTwitter.json file.
+
+What is more, 1 node and 1 core, 1 node and 8 cores, and 2 nodes and 8 cores with 4 cores per node are utilized.
 
 \section{Methodology}
 
@@ -28,9 +33,17 @@ There are different ways to classifiy parallel computers. The widely used classi
 
 Message Passing  Interface(MPI) is an useful open source tool in multi-core programming which contains many functions to share message in processes. The main difference between OpenMP and MPI is that the processes using MPI does not shared memory between each other, while OpenMP is a shared memory multiprocessing programming library.  MPI therefore able to be used in wide application regardless the physical architecture of platform.
 
-Considering that the size of data could be up to 15 GB, even though divided into chunks it is still a heavy load message transmission. So rather than reading the whole data and then sending out pieces of raw data, the master process scans and records the line indexes, and then scatters the indexes instead. A simple calculation can imply the efficiency and sufficiency. In $smallTwitter.json$, there are 
-about 7000 lines, each is one tweet, and the size of the file is about 25 MB. If we assume tweets density is even, a 15 GB file may contains: \[tweet\_num = 25MB / 15GB * 7000 \approx 4.2million\] If those tweets are represented in indexes, and each takes size of $int$, then 15 GB tweets file can be abstracted to: \[indexes\_size = 4.2million * 24bytes \approx 100MB \] The load of transmission could be largely reduced by representing tweets in form of indexes. 
+Considering that the size of data could be up to 15 GB, even though divided into chunks it is still a heavy load message transmission. So rather than reading the whole data and then sending out pieces of raw data, the master process scans and records the line indexes, and then scatters the indexes instead. A simple calculation can imply the efficiency and sufficiency. In $smallTwitter.json$, there are
+about 7000 lines, each is one tweet, and the size of the file is about 25 MB. If we assume tweets density is even, a 15 GB file may contains: \[tweet\_num = 25MB / 15GB * 7000 \approx 4.2million\] If those tweets are represented in indexes, and each takes size of $int$, then 15 GB tweets file can be abstracted to: \[indexes\_size = 4.2million * 24bytes \approx 100MB \] The load of transmission could be largely reduced by representing tweets in form of indexes.
 
+
+\section{Brief Description of Project Design}
+Two python files, __main__.py and reader.py, are designed for both sequence and parallel computing.
+
+The main implements are as follows (figure.1).
+\begin{figure}[h]
+\includegraphics[width=0.8\textwidth]{process}
+\end{figure}
 
 
 \section{Result}
@@ -40,7 +53,7 @@ about 7000 lines, each is one tweet, and the size of the file is about 25 MB. If
 \multicolumn{1}{l|}{Speedup(s)} & \multicolumn{1}{l}{Real} & \multicolumn{1}{l}{User} & \multicolumn{1}{l}{Sys} \\ \hline
 1 Node 1 Task                   & 342.685                  & 328.387                  & 12.025                  \\ \hline
 1 Node 8 Task                   & 122.154                  & 961.023                  & 13.059                  \\ \hline
-2 Node 8 Task                   & 140.352                  & 376.636                  & 181.978                
+2 Node 8 Task                   & 140.352                  & 376.636                  & 181.978
 \end{tabular}
 \caption{Runtime}
 \label{Runtime}
@@ -51,14 +64,18 @@ about 7000 lines, each is one tweet, and the size of the file is about 25 MB. If
 \multicolumn{1}{l|}{Runtime(s)} & \multicolumn{1}{l}{Speed up} \\ \hline
 1 Node 1 Task                   & 1                            \\
 1 Node 8 Task                   & 2.81                         \\
-2 Node 8 Task                   & 2.44                        
+2 Node 8 Task                   & 2.44
 \end{tabular}
 \caption{Speedup}
 \label{Speedup}
 \end{table}
 \begin{figure}[h]
-\includegraphics[width=0.8\textwidth]{Runtime}
+\includegraphics[width=0.8\textwidth]{runtime_new}
 \end{figure}
+
+
+
+
 
 \begin{appendices}
 \appendixpage
