@@ -40,7 +40,7 @@ Two python files, $\_\_main\_\_.py$ and $reader.py$, are designed for both seque
 \label{fig:flowchart}
 \end{figure}
 
-Figure \ref{fig:flowchart} shows the flowchart of our implementation .
+Figure \ref{fig:flowchart} shows the flowchart of our implementation.
 
 What is more, considering that the size of data could be up to 15 GB, even though divided into chunks it is still a heavy load message transmission. So rather than reading the whole data and then sending out pieces of raw data, we let the master process scans and records the line indexes, and then scatters the indexes instead. A simple calculation can imply the efficiency and sufficiency. In $smallTwitter.json$, there are about 7000 lines, each is one tweet entry, and the size of the file is about 25 MB. If we assume tweets density in JSON file is even, a 15 GB file may contains: \[tweet\_num = 25MB / 15GB * 7000 \approx 4.2million\] If those tweets are represented in indexes, and each takes size of $int$\footnote{In Python, a $int$ takes 24 bytes.}, then 15 GB tweets file can be abstracted to: \[indexes\_size = 4.2million * 24bytes \approx 100MB \] The load of transmission could be largely reduced by simply representing tweets in form of indexes.
 
