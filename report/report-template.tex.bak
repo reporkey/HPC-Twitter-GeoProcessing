@@ -1,6 +1,7 @@
 \documentclass[11pt]{article}
 \usepackage{colacl}
 \usepackage{appendix}
+\usepackage{graphicx}
 \renewcommand{\appendixpagename}{\Large Appendices} %	10pt
 \usepackage{listings}
 \sloppy
@@ -55,6 +56,9 @@ about 7000 lines, each is one tweet, and the size of the file is about 25 MB. If
 \caption{Speedup}
 \label{Speedup}
 \end{table}
+\begin{figure}[h]
+\includegraphics[width=0.8\textwidth]{Runtime}
+\end{figure}
 
 \begin{appendices}
 \appendixpage

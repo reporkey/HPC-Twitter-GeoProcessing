@@ -1,15 +1,14 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.9.3)  12 APR 2019 12:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2018.12.12)  12 APR 2019 18:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **HPC.tex
 (./HPC.tex
-LaTeX2e <2018-04-01> patch level 2
-Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
-(/usr/local/texlive/2018/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-(/usr/local/texlive/2018/texmf-dist/tex/latex/base/size11.clo
-File: size11.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+LaTeX2e <2018-12-01>
+(c:/texlive/2018/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
+(c:/texlive/2018/texmf-dist/tex/latex/base/size11.clo
+File: size11.clo 2018/09/03 v1.4i Standard LaTeX file (size option)
 )
 \c@part=\count80
 \c@section=\count81
@@ -29,39 +28,39 @@ derived from
 ACL-COLING 1998 Proceedings style -- March 31st 1998
 
 \titlebox=\skip43
-) (/usr/local/texlive/2018/texmf-dist/tex/latex/appendix/appendix.sty
+) (c:/texlive/2018/texmf-dist/tex/latex/appendix/appendix.sty
 Package: appendix 2009/09/02 v1.2b extra appendix facilities
 \c@@pps=\count88
 \c@@ppsavesec=\count89
 \c@@ppsaveapp=\count90
 )
-(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/graphicx.sty
+(c:/texlive/2018/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/keyval.sty
+(c:/texlive/2018/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks14
 )
-(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/graphics.sty
+(c:/texlive/2018/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/trig.sty
+(c:/texlive/2018/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 )
-(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+(c:/texlive/2018/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 99.
 
-(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics-def/pdftex.def
+(c:/texlive/2018/texmf-dist/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen103
 \Gin@req@width=\dimen104
 )
-(/usr/local/texlive/2018/texmf-dist/tex/latex/listings/listings.sty
+(c:/texlive/2018/texmf-dist/tex/latex/listings/listings.sty
 \lst@mode=\count91
-\lst@gtempboxa=\box26
+\lst@gtempboxa=\box27
 \lst@token=\toks15
 \lst@length=\count92
 \lst@currlwidth=\dimen105
@@ -73,38 +72,37 @@ File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 \lst@lineno=\count96
 \lst@maxwidth=\dimen108
 
-(/usr/local/texlive/2018/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+(c:/texlive/2018/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2018/09/02 1.7 (Carsten Heinz)
 \c@lstnumber=\count97
 \lst@skipnumbers=\count98
-\lst@framebox=\box27
+\lst@framebox=\box28
 )
-(/usr/local/texlive/2018/texmf-dist/tex/latex/listings/listings.cfg
-File: listings.cfg 2015/06/04 1.6 listings configuration
+(c:/texlive/2018/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2018/09/02 1.7 listings configuration
 ))
-Package: listings 2015/06/04 1.6 (Carsten Heinz)
-
-(./HPC.aux)
+Package: listings 2018/09/02 1.7 (Carsten Heinz)
+ (./HPC.aux)
 \openout1 = `HPC.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
 
-(/usr/local/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+(c:/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count99
 \scratchdimen=\dimen109
-\scratchbox=\box28
+\scratchbox=\box29
 \nofMPsegments=\count100
 \nofMParguments=\count101
 \everyMPshowfont=\toks16
@@ -113,31 +111,31 @@ LaTeX Font Info:    ... okay on input line 15.
 \MPnumerator=\count103
 \makeMPintoPDFobject=\count104
 \everyMPtoPDFconversion=\toks17
-) (/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+) (c:/texlive/2018/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
-(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+(c:/texlive/2018/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
 )
-(/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/grfext.sty
+(c:/texlive/2018/texmf-dist/tex/latex/oberdiek/grfext.sty
 Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
 
-(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+(c:/texlive/2018/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
 Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
 
-(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+(c:/texlive/2018/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
 Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
 )))
-(/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+(c:/texlive/2018/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 
-(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+(c:/texlive/2018/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
 Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
 
-(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+(c:/texlive/2018/texmf-dist/tex/generic/oberdiek/etexcmds.sty
 Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
 
-(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+(c:/texlive/2018/texmf-dist/tex/generic/oberdiek/ifluatex.sty
 Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 )
@@ -146,12 +144,12 @@ Package etexcmds Info: Could not find \expanded.
 (etexcmds)             that some package has redefined \expanded.
 (etexcmds)             In the latter case, load this package earlier.
 )))
-(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2018/01/30 v0.27 Utility functions of pdfTeX for LuaTeX (HO
+(c:/texlive/2018/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2018/09/10 v0.29 Utility functions of pdfTeX for LuaTeX (HO
 )
 
-(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
+(c:/texlive/2018/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2018/09/07 v3.3 Provides the ifpdf switch
 )
 Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
@@ -165,45 +163,66 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 
-(/usr/local/texlive/2018/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+(c:/texlive/2018/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \c@lstlisting=\count105
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 16.
+(Font)              <12> on input line 14.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 16.
+(Font)              <8> on input line 14.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 16.
+(Font)              <6> on input line 14.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 22.
+(Font)              <10.95> on input line 20.
+
+Underfull \hbox (badness 10000) in paragraph at lines 20--21
+[]\OT1/cmr/m/n/10.95 There are four JSON files. The
+ []
+
 <process.jpeg, id=1, 613.29124pt x 764.8575pt>
 File: process.jpeg Graphic file (type jpg)
 <use process.jpeg>
-Package pdftex.def Info: process.jpeg  used on input line 46.
-(pdftex.def)             Requested size: 211.3883pt x 263.63103pt.
-<runtime_new.png, id=2, 368.37625pt x 214.8025pt>
-File: runtime_new.png Graphic file (type png)
-<use runtime_new.png>
-Package pdftex.def Info: runtime_new.png  used on input line 55.
-(pdftex.def)             Requested size: 234.87749pt x 136.95854pt.
+Package pdftex.def Info: process.jpeg  used on input line 38.
+(pdftex.def)             Requested size: 225.48038pt x 281.20721pt.
 
-Overfull \hbox (9.03374pt too wide) in paragraph at lines 55--56
-[][] 
- []
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-[1{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 45.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 45.
+[1{c:/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
 
 ]
+<runtimeChart2.png, id=16, 372.9132pt x 204.765pt>
+File: runtimeChart2.png Graphic file (type png)
+<use runtimeChart2.png>
+Package pdftex.def Info: runtimeChart2.png  used on input line 52.
+(pdftex.def)             Requested size: 225.48038pt x 123.80977pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 70.
+               Default added (so using `tbp') on input line 57.
 
-(/usr/local/texlive/2018/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2015/06/04 1.6 listings language file
+
+Overfull \hbox (4.71725pt too wide) in paragraph at lines 58--64
+[][] 
+ []
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 68.
+
+[2 <./process.jpeg> <./runtimeChart2.png>]
+(c:/texlive/2018/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2018/09/02 1.7 listings language file
 )
 (./1node1task.slurm
 Overfull \hbox (10.67871pt too wide) in paragraph at lines 7--9
@@ -215,33 +234,34 @@ Overfull \hbox (10.67871pt too wide) in paragraph at lines 7--9
 [][][][][][][][][][][] 
  []
 
-) (./2node8task.slurm [2 <./process.jpeg> <./runtime_new.png>]
+) (./2node8task.slurm
 Overfull \hbox (10.67871pt too wide) in paragraph at lines 7--9
 [][][][][][][][][][][] 
  []
 
-) [3
-
-] (./HPC.aux) ) 
+) [3] (./HPC.aux) ) 
 Here is how much of TeX's memory you used:
- 3255 strings out of 492649
- 44597 string characters out of 6129623
- 143334 words of memory out of 5000000
- 7109 multiletter control sequences out of 15000+600000
- 9464 words of font info for 33 fonts, out of 8000000 for 9000
+ 3268 strings out of 492616
+ 44298 string characters out of 6132767
+ 310124 words of memory out of 5000000
+ 7148 multiletter control sequences out of 15000+600000
+ 10376 words of font info for 36 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,9n,43p,539b,1584s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmmi10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-sy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
-i10.pfb>
-Output written on HPC.pdf (3 pages, 154256 bytes).
+ 41i,9n,43p,1181b,1152s stack positions out of 5000i,500n,10000p,200000b,80000s
+<c:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mbx10.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+><c:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texl
+ive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><c:/texlive/2018/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2018/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2018/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr8.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr9.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy10.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+
+Output written on HPC.pdf (3 pages, 191873 bytes).
 PDF statistics:
- 42 PDF objects out of 1000 (max. 8388607)
- 27 compressed objects within 1 object stream
+ 57 PDF objects out of 1000 (max. 8388607)
+ 38 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

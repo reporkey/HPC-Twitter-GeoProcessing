@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2018.12.12)  9 APR 2019 17:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2018.12.12)  12 APR 2019 15:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -176,23 +176,35 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 16.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 31.
+(Font)              <10.95> on input line 36.
+<process.jpeg, id=1, 613.29124pt x 764.8575pt>
+File: process.jpeg Graphic file (type jpg)
+<use process.jpeg>
+Package pdftex.def Info: process.jpeg  used on input line 45.
+(pdftex.def)             Requested size: 375.80542pt x 468.68646pt.
+
+Overfull \hbox (149.96167pt too wide) in paragraph at lines 45--46
+[][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 38.
+               Default added (so using `tbp') on input line 51.
 
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 49.
+               Default added (so using `tbp') on input line 62.
 
-<Runtime.png, id=1, 362.3136pt x 217.7736pt>
-File: Runtime.png Graphic file (type png)
-<use Runtime.png>
-Package pdftex.def Info: Runtime.png  used on input line 60.
-(pdftex.def)             Requested size: 375.80542pt x 225.88106pt.
+<runtime_new.png, id=2, 368.37625pt x 214.8025pt>
+File: runtime_new.png Graphic file (type png)
+<use runtime_new.png>
+Package pdftex.def Info: runtime_new.png  used on input line 73.
+(pdftex.def)             Requested size: 375.80542pt x 219.1317pt.
 
-Overfull \hbox (149.96167pt too wide) in paragraph at lines 60--61
+Overfull \hbox (149.96167pt too wide) in paragraph at lines 73--74
 [][] 
  []
 
@@ -201,18 +213,16 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 (c:/texlive/2018/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2018/09/02 1.7 listings language file
-)
-(./1node1task.slurm
+) [1{c:/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+
+
+] (./1node1task.slurm
 Overfull \hbox (10.67871pt too wide) in paragraph at lines 7--9
 [][][][][][][][][][][] 
  []
 
-[1{c:/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
-
-
-
-])
-(./1node8task.slurm
+) (./1node8task.slurm
 Overfull \hbox (10.67871pt too wide) in paragraph at lines 7--9
 [][][][][][][][][][][] 
  []
@@ -222,27 +232,27 @@ Overfull \hbox (10.67871pt too wide) in paragraph at lines 7--9
 [][][][][][][][][][][] 
  []
 
-) [2
+) [2 <./process.jpeg> <./runtime_new.png>] [3
 
- <./Runtime.png>] (./report-template.aux) ) 
+] (./report-template.aux) ) 
 Here is how much of TeX's memory you used:
- 3250 strings out of 492616
- 44151 string characters out of 6132767
- 317186 words of memory out of 5000000
- 7137 multiletter control sequences out of 15000+600000
+ 3258 strings out of 492616
+ 44262 string characters out of 6132767
+ 312015 words of memory out of 5000000
+ 7141 multiletter control sequences out of 15000+600000
  9464 words of font info for 33 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,9n,43p,551b,1645s stack positions out of 5000i,500n,10000p,200000b,80000s
-<c:/texlive/2018/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2018/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmbx12.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmmi10.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
-0.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:
-/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on report-template.pdf (2 pages, 100835 bytes).
+ 41i,9n,43p,551b,1584s stack positions out of 5000i,500n,10000p,200000b,80000s
+<c:/texlive/2018/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmbx10.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+bx12.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
+<c:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texliv
+e/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2018/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on report-template.pdf (3 pages, 152548 bytes).
 PDF statistics:
- 37 PDF objects out of 1000 (max. 8388607)
- 24 compressed objects within 1 object stream
+ 42 PDF objects out of 1000 (max. 8388607)
+ 27 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
